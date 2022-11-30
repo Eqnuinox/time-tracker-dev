@@ -1,0 +1,11 @@
+.err_label{
+    float: left;
+}
+
+.passwordToggleIcon{
+    position: absolute;
+    top: 62px;
+    right: 10px;
+    z-index: 1000;
+    cursor: pointer;
+}

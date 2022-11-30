@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+}
+.user_listItem{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 1px 2px 1px 0 rgb(100 133 100 / 25%);
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    background-color: #e0e1e2;
+    text-transform: uppercase;
+    color: darkcyan;
+}
+
+.user_PrData{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 10px;
+}
+
+.grid_conf{
+    width: 20%;
+}
+
+.userId{
+    width: 20px;
+    padding: 0 10px;
+}

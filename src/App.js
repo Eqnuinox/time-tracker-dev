@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {useAuth} from "./hooks/AuthHooks";
+import {AuthContext} from "./Context/Context";
+import {useRoutes} from "./Routes";
+import 'semantic-ui-css/semantic.min.css'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const {token, login, logOut} = useAuth()
+
+    function hasJWT() {
+        let flag = false;
+
+        const data = JSON.parse(localStorage.getItem('userData') || '{}')
+        data.token ? flag = true : flag = false
+
+        return flag
+    }
+
+    const routes = useRoutes(hasJWT)
+
+    return (
+        <AuthContext.Provider value={{
+            token, login, logOut
+        }}>
+            {routes}
+        </AuthContext.Provider>
+    );
 }
 
 export default App;
+

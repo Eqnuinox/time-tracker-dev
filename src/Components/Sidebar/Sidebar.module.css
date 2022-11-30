@@ -1,0 +1,15 @@
+.sidebar button a{
+    color: dimgrey!important;
+    padding: 20px 21px;
+    width: 60px !important;
+}
+
+.sidebar button{
+    height: 60px;
+    padding: 0 !important;
+    cursor:default !important;
+}
+
+.sidebar{
+    margin-right:30px ;
+}

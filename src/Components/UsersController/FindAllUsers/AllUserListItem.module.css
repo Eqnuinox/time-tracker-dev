@@ -1,0 +1,33 @@
+.user_listItem{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 1px 2px 5px 0 rgb(100 133 100 / 25%);
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.user_PrData{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 10px;
+    background-color: aliceblue;
+}
+
+.grid_conf{
+    width: 20%;
+}
+
+
+.userId{
+    width: 20px;
+    padding: 0 10px;
+}
+
+.idRole{
+    display: flex;
+    flex-direction: column;
+    color: cadetblue;
+}
