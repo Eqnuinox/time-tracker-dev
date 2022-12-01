@@ -2,16 +2,14 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Form, Input, Label } from 'semantic-ui-react'
 import classes from './AuthForm.module.css'
-import usePasswordToggle from '../../hooks/usePasswordToggle'
+import { usePasswordToggle } from '../../hooks/usePasswordToggle'
 
-const AuthForm = ({ handleSubmit, isSingUp = false }) => {
+const AuthForm = ({ handleSubmit, isSingUp = false, statusSelector }) => {
 	const [email, setEmail] = useState('')
 	const [name, setName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [password, setPassword] = useState('')
 	const [passwordInputType, toggleIcon] = usePasswordToggle()
-
-	const statusSelector = useSelector((state) => state.auth.status)
 
 	let toggleLoadingCheck = statusSelector === 'pending' ? 'loading' : ''
 	let toggleErrorCheck = statusSelector === 'rejected' ? 'error' : ''

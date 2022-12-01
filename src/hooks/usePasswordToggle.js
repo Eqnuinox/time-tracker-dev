@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 
-const usePasswordToggle = () => {
+export const usePasswordToggle = () => {
 	const [visible, setVisible] = useState(false)
 
 	const Icon = (
@@ -18,4 +18,3 @@ const usePasswordToggle = () => {
 	return [InputType, Icon]
 }
 
-export default usePasswordToggle

@@ -1,18 +1,23 @@
 import { UserAPI } from '../API/UsersAPI/UserApi'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { instance } from '../API'
 import { storageName } from './AuthHooks'
+import { useDispatch } from 'react-redux'
+import { removeUser } from '../Redux/Slices/authSlice'
 
 export const useRemoveUsers = () => {
-	const remove = useCallback((id) => {
-		const { token } = JSON.parse(localStorage.getItem(storageName) || '')
-		console.log(token)
-		instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+	const [loading, setLoading] = useState(false)
+	const dispatch = useDispatch()
 
+	const remove = useCallback((id) => {
+		setLoading(true)
+		const { token } = JSON.parse(localStorage.getItem(storageName) || '')
+		instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
 		UserAPI.removeUser(id).then((r) => {
-			return alert('deleted')
+			dispatch(removeUser(id))
+			setLoading(false)
 		})
 	}, [])
 
-	return { remove }
+	return { remove, loading }
 }

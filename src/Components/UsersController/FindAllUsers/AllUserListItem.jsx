@@ -4,8 +4,9 @@ import { Button, Confirm } from 'semantic-ui-react'
 import { useRemoveUsers } from '../../../hooks/useRemoveUsers'
 
 const AllUsersListItem = ({ users }) => {
-	const { remove } = useRemoveUsers()
-	const handleId = useCallback(() => {
+	const { remove, loading } = useRemoveUsers()
+	let toggleProcess = loading ? 'loading' : ''
+	const handleRemoveUser = useCallback(() => {
 		remove(users.id)
 	}, [])
 
@@ -22,7 +23,11 @@ const AllUsersListItem = ({ users }) => {
 			<Button.Group>
 				<Button>Update</Button>
 				<Button.Or />
-				<Button negative onClick={handleId}>
+				<Button
+					className={`${toggleProcess}`}
+					negative
+					onClick={handleRemoveUser}
+				>
 					Remove
 				</Button>
 			</Button.Group>

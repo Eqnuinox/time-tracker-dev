@@ -1,16 +1,16 @@
 import React from 'react'
-import { Button, Modal } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 import AuthForm from '../AuthForm/AuthForm'
 import { createUsers } from '../../Redux/Slices/userControlSlices/createUserSlice'
 import { storageName } from '../../hooks/AuthHooks'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { addUser } from '../../Redux/Slices/userControlSlices/findAllUsersSlice'
 
-export const AddUserModal = () => {
+export const AddUserModal = ({ handleSubmit }) => {
 	const { token } = JSON.parse(localStorage.getItem(storageName) || '{}')
 
+	const statusSelector = useSelector((state) => state.createUser.status)
 	const dispatch = useDispatch()
-	const navigate = useNavigate()
 
 	const handleAddUser = (userEmail, userPassword, name, lastName) => {
 		const newUserData = {
@@ -19,16 +19,22 @@ export const AddUserModal = () => {
 			firstName: name,
 			lastName: lastName
 		}
-		dispatch(createUsers([token, { newUserData }])).then((response) => {
-			navigate('/admin/user-controller', { replace: true })
-		})
+		dispatch(createUsers([token, { newUserData }])).then(
+			({ payload: { response } }) => {
+				handleSubmit(false)
+				dispatch(addUser(response))
+			}
+		)
 	}
 
 	return (
 		<>
-			<Modal.Header>Create User</Modal.Header>
 			<Modal.Content>
-				<AuthForm handleSubmit={handleAddUser} isSingUp={true} />
+				<AuthForm
+					handleSubmit={handleAddUser}
+					isSingUp={true}
+					statusSelector={statusSelector}
+				/>
 			</Modal.Content>
 		</>
 	)

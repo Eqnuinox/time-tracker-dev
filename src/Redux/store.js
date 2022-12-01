@@ -25,12 +25,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
 	key: 'root',
 	storage,
-	blacklist: [
-		'auth',
-		'getCurrentUserData',
-		'getCreateUsersSlice',
-		'getAllUsersSlice'
-	]
+	blacklist: ['auth', 'getCurrentUserData', 'createUsers', 'findAllUsers']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

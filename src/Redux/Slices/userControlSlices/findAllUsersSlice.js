@@ -3,7 +3,7 @@ import { instance } from '../../../API'
 import { UserAPI } from '../../../API/UsersAPI/UserApi'
 
 const initialState = {
-	data: null,
+	data: [],
 	status: null,
 	error: null
 }
@@ -29,6 +29,15 @@ export const findAllUsersSlice = createAsyncThunk(
 const getAllUsersSlice = createSlice({
 	name: 'admin',
 	initialState,
+	reducers: {
+		addUser(state, action) {
+			state.data.push(action.payload)
+		},
+		removeUser(state, action) {
+			state.data = state.data.filter((data) => data.id !== action.payload)
+		}
+	},
+
 	extraReducers: {
 		[findAllUsersSlice.pending]: (state) => {
 			state.status = 'pending'
@@ -44,5 +53,7 @@ const getAllUsersSlice = createSlice({
 		}
 	}
 })
+
+export const { addUser } = getAllUsersSlice.actions
 
 export default getAllUsersSlice.reducer
