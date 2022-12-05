@@ -4,10 +4,14 @@ import AuthAdmin from '../Pages/AuthAdmin'
 import Auth from '../Pages/Auth'
 import Admin from '../Pages/Admin'
 import UserControllerPage from '../Pages/Admin/UserController/UserController'
+import TimeTrackController from '../Pages/Admin/TimeTrackController/TimeTrackController'
+import ProjectController from '../Pages/Admin/PojectController/ProjectController'
 
 export const privateRoutes = [
-	{ path: '/admin', element: <Admin /> },
-	{ path: '/admin/user-controller', element: <UserControllerPage /> }
+	{ path: '/admin/user-controller', element: <UserControllerPage /> },
+	{ path: '/admin/time-track-controller', element: <TimeTrackController /> },
+	{ path: '/admin', element: <ProjectController /> },
+	{ path: '/admin/:id', element: <Navigate to={'/admin'} /> }
 ]
 
 export const publicRoutes = [

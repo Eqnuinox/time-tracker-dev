@@ -7,7 +7,7 @@ export const storageName = 'userData'
 export const useAllUsers = ([usersIds] = []) => {
 	const dispatch = useDispatch()
 	const token = JSON.parse(localStorage.getItem(storageName)).token
-	const { status } = useSelector((sate) => sate.createUser)
+	const { status } = useSelector((sate) => sate.findAllUsers)
 	const data = useSelector((sate) => sate.findAllUsers.data)
 	const [users, setUsers] = useState([])
 
@@ -15,7 +15,7 @@ export const useAllUsers = ([usersIds] = []) => {
 		dispatch(findAllUsersSlice([token, [usersIds]]))
 		setUsers(data)
 		// eslint-disable-next-line
-	}, [status])
+	}, [])
 
 	return { users, status }
 }

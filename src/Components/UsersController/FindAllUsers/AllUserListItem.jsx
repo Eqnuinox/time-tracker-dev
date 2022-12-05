@@ -6,6 +6,7 @@ import { useRemoveUsers } from '../../../hooks/useRemoveUsers'
 const AllUsersListItem = ({ users }) => {
 	const { remove, loading } = useRemoveUsers()
 	let toggleProcess = loading ? 'loading' : ''
+	let toggleDisabled = users.id === 1 && 'disabled'
 	const handleRemoveUser = useCallback(() => {
 		remove(users.id)
 	}, [])
@@ -24,7 +25,7 @@ const AllUsersListItem = ({ users }) => {
 				<Button>Update</Button>
 				<Button.Or />
 				<Button
-					className={`${toggleProcess}`}
+					className={`${toggleProcess} ${toggleDisabled}`}
 					negative
 					onClick={handleRemoveUser}
 				>

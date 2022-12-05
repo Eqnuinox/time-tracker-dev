@@ -14,10 +14,10 @@ const Sidebar = () => {
 					<Link to={'/admin/user-controller'}>UserControl</Link>
 				</Button>
 				<Button>
-					<Link to={'/admin'}>Home</Link>
+					<Link to={'/admin/time-track-controller'}>TimeTrackController</Link>
 				</Button>
 				<Button>
-					<Link to={'/admin'}>Home</Link>
+					<Link to={'/admin/project-controller'}>Project controller</Link>
 				</Button>
 				<Button>
 					<Link to={'/admin'}>Home</Link>

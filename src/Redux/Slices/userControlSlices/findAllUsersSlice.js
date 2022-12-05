@@ -54,6 +54,6 @@ const getAllUsersSlice = createSlice({
 	}
 })
 
-export const { addUser } = getAllUsersSlice.actions
+export const { addUser, removeUser } = getAllUsersSlice.actions
 
 export default getAllUsersSlice.reducer

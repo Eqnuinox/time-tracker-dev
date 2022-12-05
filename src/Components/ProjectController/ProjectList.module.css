@@ -1,0 +1,15 @@
+.button{
+    margin-bottom: 20px !important;
+}
+
+.container{
+    width: 100%;
+    min-height: 50vh;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.card{
+    margin: 8px !important
+;
+}

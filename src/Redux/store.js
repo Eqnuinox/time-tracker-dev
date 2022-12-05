@@ -4,6 +4,7 @@ import getCurrentUserDataReducer from './Slices/userSlice'
 import storage from 'redux-persist/lib/storage'
 import getAllUsersReducer from './Slices/userControlSlices/findAllUsersSlice'
 import getCreateUserReducer from './Slices/userControlSlices/createUserSlice'
+import getAllProjectReducer from './Slices/projectControllSlices/allProgectSlice'
 import {
 	persistReducer,
 	persistStore,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
 	auth: authReducer,
 	getCurrentUserData: getCurrentUserDataReducer,
 	findAllUsers: getAllUsersReducer,
-	createUser: getCreateUserReducer
+	createUser: getCreateUserReducer,
+	projects: getAllProjectReducer
 })
 
 const persistConfig = {
