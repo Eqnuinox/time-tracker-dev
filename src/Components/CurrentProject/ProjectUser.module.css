@@ -1,0 +1,29 @@
+
+.user_listItem{
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.user_list{
+    margin-top: 30px;
+}
+
+.button{
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    border: none;
+    float: left;
+    background-color: #f7f7f7;
+    border-radius: 30px;
+    height: 20px;
+    width: 20px;
+}
+
+.button i{
+    align-self: center;
+    margin: auto !important;
+}

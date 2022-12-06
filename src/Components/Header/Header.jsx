@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCurrentUser } from '../../Redux/Slices/userSlice'
 import classes from './Header.module.css'
 import { removeUser } from '../../Redux/Slices/authSlice'
+import { UserAPI } from '../../API/UsersAPI/UserApi'
 
 const Header = () => {
 	const auth = useContext(AuthContext)

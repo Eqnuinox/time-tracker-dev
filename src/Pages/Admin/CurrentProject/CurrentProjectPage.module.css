@@ -1,0 +1,49 @@
+.headerInside{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 4px 0 rgb(100 133 100 / 25%);
+    background-color: white;
+}
+
+.headerInside div span{
+    line-height: 30px;
+    color: gray;
+    font-size: 12px;
+}
+
+.headerInside div div{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    color:lightskyblue;
+    font-weight: 600;
+    font-size: 22px;
+    text-transform: capitalize;
+
+}
+
+.header{
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f7;
+    border-radius: 20px;
+    box-shadow: 1px 2px 4px 0 rgb(100 133 100 / 15%);
+    padding: 20px;
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.self{
+    color: dimgrey;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px;
+    align-self: flex-start;
+}

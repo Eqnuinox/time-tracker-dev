@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { UserAPI } from '../../API/UsersAPI/UserApi'
 import { instance } from '../../API'
+import { useAuth } from '../../hooks/AuthHooks'
 
 const initialState = {
 	applicationRole: null,
@@ -13,13 +14,23 @@ const initialState = {
 
 export const getCurrentUser = createAsyncThunk(
 	'admin/getCurrentUser',
-	async function ([CurrentUserId, currentUserToken]) {
-		instance.defaults.headers.common[
-			'Authorization'
-		] = `Bearer ${currentUserToken}`
-		const response = await UserAPI.getUserData(CurrentUserId)
-		const data = await response.data
-		return data.response
+	async function ([CurrentUserId, currentUserToken], { rejectWithValue }) {
+		try {
+			instance.defaults.headers.common[
+				'Authorization'
+			] = `Bearer ${currentUserToken}`
+			const response = await UserAPI.getUserData(CurrentUserId)
+
+			if (response.status !== 200) {
+				delete instance.defaults.headers.common['Authorization']
+				throw new Error('unauth')
+			}
+			const data = await response.data
+
+			return data.response
+		} catch (e) {
+			rejectWithValue(e)
+		}
 	}
 )
 
@@ -27,7 +38,7 @@ const getCurrentUserDataSlice = createSlice({
 	name: 'admin',
 	initialState,
 	extraReducers: {
-		[getCurrentUser.pending]: (state) => {
+		[getCurrentUser.pending]: (state, action) => {
 			state.status = 'pending'
 			state.error = null
 		},
@@ -38,7 +49,10 @@ const getCurrentUserDataSlice = createSlice({
 			state.firstName = action.payload.firstName
 			state.lastName = action.payload.lastName
 		},
-		[getCurrentUser.rejected]: (state, action) => {}
+		[getCurrentUser.rejected]: (state, action) => {
+			state.status = 'rejected'
+			state.error = action.payload
+		}
 	}
 })
 

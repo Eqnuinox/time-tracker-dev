@@ -3,7 +3,7 @@ import classes from './AllUserListItem.module.css'
 import { Button, Confirm } from 'semantic-ui-react'
 import { useRemoveUsers } from '../../../hooks/useRemoveUsers'
 
-const AllUsersListItem = ({ users }) => {
+const AllUsersListItem = ({ users, registerUser = false, onRegisterUser }) => {
 	const { remove, loading } = useRemoveUsers()
 	let toggleProcess = loading ? 'loading' : ''
 	let toggleDisabled = users.id === 1 && 'disabled'
@@ -21,17 +21,21 @@ const AllUsersListItem = ({ users }) => {
 				<span>Last name:{users.lastName}</span>
 			</div>
 			<div className={classes.grid_conf}>{users.email}</div>
-			<Button.Group>
-				<Button>Update</Button>
-				<Button.Or />
-				<Button
-					className={`${toggleProcess} ${toggleDisabled}`}
-					negative
-					onClick={handleRemoveUser}
-				>
-					Remove
-				</Button>
-			</Button.Group>
+			{!registerUser ? (
+				<Button.Group>
+					<Button>Update</Button>
+					<Button.Or />
+					<Button
+						className={`${toggleProcess} ${toggleDisabled}`}
+						negative
+						onClick={handleRemoveUser}
+					>
+						Remove
+					</Button>
+				</Button.Group>
+			) : (
+				<Button onClick={() => onRegisterUser(users.id)}>Add</Button>
+			)}
 		</div>
 	)
 }

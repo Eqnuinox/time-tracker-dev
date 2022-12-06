@@ -2,9 +2,13 @@ import { instance } from '../index'
 
 export class UserAPI {
 	static getUserData(currentUserId) {
-		return instance.get(`/users/${currentUserId}`).then((response) => {
-			return response
-		})
+		try {
+			return instance.get(`/users/${currentUserId}`).then((response) => {
+				return response
+			})
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
 	static findAllUser([usersIds]) {

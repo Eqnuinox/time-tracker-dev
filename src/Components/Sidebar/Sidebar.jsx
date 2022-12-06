@@ -17,7 +17,7 @@ const Sidebar = () => {
 					<Link to={'/admin/time-track-controller'}>TimeTrackController</Link>
 				</Button>
 				<Button>
-					<Link to={'/admin/project-controller'}>Project controller</Link>
+					<Link to={'/admin'}>Project controller</Link>
 				</Button>
 				<Button>
 					<Link to={'/admin'}>Home</Link>

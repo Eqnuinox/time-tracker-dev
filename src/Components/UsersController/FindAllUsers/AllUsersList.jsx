@@ -3,8 +3,6 @@ import AllUsersListItem from './AllUserListItem'
 import { useSelector } from 'react-redux'
 import { useAllUsers } from '../../../hooks/useAllUsers'
 import { Dimmer, Loader, Segment } from 'semantic-ui-react'
-import Search from '../../Search/Search'
-import { clear } from '@testing-library/user-event/dist/clear'
 
 const filter = (search, usersList) => {
 	if (!search) {
@@ -15,7 +13,7 @@ const filter = (search, usersList) => {
 	)
 }
 
-const AllUsersList = () => {
+const AllUsersList = ({ registerUser, onRegisterUser }) => {
 	const { status } = useAllUsers()
 	const users = useSelector((state) => state.findAllUsers.data)
 	const [filteredUsers, setFilteredUsers] = useState([])
@@ -47,7 +45,12 @@ const AllUsersList = () => {
 					</Segment>
 				) : (
 					filteredUsers.map((id, key) => (
-						<AllUsersListItem users={id} key={key} />
+						<AllUsersListItem
+							onRegisterUser={onRegisterUser}
+							registerUser={registerUser}
+							users={id}
+							key={key}
+						/>
 					))
 				)}
 			</div>
