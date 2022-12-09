@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AllUsersList from '../UsersController/FindAllUsers/AllUsersList'
 import { Form } from 'semantic-ui-react'
 
-const CustomList = ({ onRegisterUser, tittle = '', onChooseRole, role }) => {
+const CustomList = ({
+	onRegisterUser,
+	tittle = '',
+	onChooseRole,
+	role,
+	error
+}) => {
 	return (
 		<>
 			<h2>{tittle}</h2>
+			{error.error && <h3>{error.message}</h3>}
 			<Form>
 				<Form.Group inline>
 					<Form.Radio

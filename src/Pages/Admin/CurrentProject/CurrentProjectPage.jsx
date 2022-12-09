@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAllProjects } from '../../../hooks/useAllProjects'
-import { useCurrentProject } from '../../../hooks/useCurrentProject'
 import ProjectUsers from '../../../Components/CurrentProject/ProjectUsers'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import classes from './CurrentProjectPage.module.css'
@@ -9,13 +8,22 @@ import CustomList from '../../../Components/Modal/CustomList'
 import { useProjectUser } from '../../../hooks/useProjectUser'
 
 const CurrentProjectPage = () => {
-	const [open, setOpen] = useState()
 	const { id } = useParams()
-	const { data: projectList } = useAllProjects()
-	const currentProject = projectList.find((x) => x.id.toString() === id)
-	const project = useCurrentProject(id)
-	const { usersOfProject, removeProjectUser } = useProjectUser(id)
+
+	const [open, setOpen] = useState()
 	const [role, setRole] = useState('DEVELOPER')
+
+	const { data: projectList } = useAllProjects()
+
+	const currentProject = projectList.find((x) => x.id.toString() === id)
+
+	const {
+		filteredData: usersOfProject,
+		error,
+		success,
+		registerUserInProject,
+		removeProjectUser
+	} = useProjectUser(id)
 
 	const handleChooseRole = useCallback((e, { value }) => {
 		setRole(value)
@@ -23,7 +31,10 @@ const CurrentProjectPage = () => {
 
 	const handleRegisterUserOnProject = useCallback(
 		(userId) => {
-			project.registerUserInProject(userId, role)
+			if (success) {
+				setOpen(false)
+			}
+			registerUserInProject(userId, role)
 		},
 		[role]
 	)
@@ -58,6 +69,7 @@ const CurrentProjectPage = () => {
 				<Modal.Header>Create new</Modal.Header>
 				<Modal.Content>
 					<CustomList
+						error={error}
 						role={role}
 						onChooseRole={handleChooseRole}
 						onRegisterUser={handleRegisterUserOnProject}

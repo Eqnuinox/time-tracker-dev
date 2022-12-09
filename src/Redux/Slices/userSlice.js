@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { UserAPI } from '../../API/UsersAPI/UserApi'
 import { instance } from '../../API'
-import { useAuth } from '../../hooks/AuthHooks'
 
 const initialState = {
 	applicationRole: null,
@@ -20,16 +19,15 @@ export const getCurrentUser = createAsyncThunk(
 				'Authorization'
 			] = `Bearer ${currentUserToken}`
 			const response = await UserAPI.getUserData(CurrentUserId)
-
-			if (response.status !== 200) {
-				delete instance.defaults.headers.common['Authorization']
-				throw new Error('unauth')
-			}
 			const data = await response.data
 
 			return data.response
-		} catch (e) {
-			rejectWithValue(e)
+		} catch (Error) {
+			debugger
+			delete instance.defaults.headers.common['Authorization']
+			localStorage.removeItem('userData')
+			rejectWithValue(Error.response.status)
+			console.log(Error.response.status)
 		}
 	}
 )
@@ -38,7 +36,7 @@ const getCurrentUserDataSlice = createSlice({
 	name: 'admin',
 	initialState,
 	extraReducers: {
-		[getCurrentUser.pending]: (state, action) => {
+		[getCurrentUser.pending]: (state) => {
 			state.status = 'pending'
 			state.error = null
 		},

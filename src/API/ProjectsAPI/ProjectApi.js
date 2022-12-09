@@ -49,7 +49,7 @@ export class ProjectApi {
 			})
 	}
 
-	static findProjectUsers(id) {
+	static findProjectUsers(id = '') {
 		return instance
 			.get(id ? `/project-users` : `/project-users/${id}`)
 			.then((response) => {

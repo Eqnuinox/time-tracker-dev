@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { instance } from '../../../API'
-import { UserAPI } from '../../../API/UsersAPI/UserApi'
 import { ProjectApi } from '../../../API/ProjectsAPI/ProjectApi'
 
 const initialState = {
@@ -16,10 +15,6 @@ export const findAllProjectsSlice = createAsyncThunk(
 			instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
 			const response = await ProjectApi.findAllProject()
 			const { response: projectsArray } = await response.data
-
-			if (response.data.success === false) {
-				throw new Error('Server Error')
-			}
 			return projectsArray
 		} catch (error) {
 			return rejectWithValue(error.message)

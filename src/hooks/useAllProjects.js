@@ -4,12 +4,12 @@ import {
 	findAllProjectsSlice,
 	removeProjectById,
 	updateProjectById
-} from '../Redux/Slices/projectControllSlices/allProgectSlice'
+} from '../Redux/Slices/projectControllSlices/allProjectSlice'
 import { token } from '../Shared/tokenApi'
 import { ProjectApi } from '../API/ProjectsAPI/ProjectApi'
 import { useCallback, useEffect, useState } from 'react'
 
-export const useAllProjects = (callback, deps) => {
+export const useAllProjects = () => {
 	const [isLoading, setIsLoading] = useState(false)
 
 	const dispatch = useDispatch()
