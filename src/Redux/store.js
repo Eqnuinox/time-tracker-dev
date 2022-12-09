@@ -6,6 +6,7 @@ import getAllUsersReducer from './Slices/userControlSlices/findAllUsersSlice'
 import getCreateUserReducer from './Slices/userControlSlices/createUserSlice'
 import getAllProjectReducer from './Slices/projectControllSlices/allProjectSlice'
 import getAllProjectUsersReducer from './Slices/projectControllSlices/allProjectUsers'
+import getAllTasksReducer from './Slices/projectControllSlices/allTasksSlice'
 
 import {
 	persistReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
 	findAllUsers: getAllUsersReducer,
 	createUser: getCreateUserReducer,
 	projects: getAllProjectReducer,
-	usersOnProject: getAllProjectUsersReducer
+	usersOnProject: getAllProjectUsersReducer,
+	projectTasks: getAllTasksReducer
 })
 
 const persistConfig = {

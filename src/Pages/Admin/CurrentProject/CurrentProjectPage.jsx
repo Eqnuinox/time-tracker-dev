@@ -6,6 +6,7 @@ import { Button, Icon, Modal } from 'semantic-ui-react'
 import classes from './CurrentProjectPage.module.css'
 import CustomList from '../../../Components/Modal/CustomList'
 import { useProjectUser } from '../../../hooks/useProjectUser'
+import ProjectTasks from '../../../Components/CurrentProject/ProjectTasks'
 
 const CurrentProjectPage = () => {
 	const { id } = useParams()
@@ -22,7 +23,8 @@ const CurrentProjectPage = () => {
 		error,
 		success,
 		registerUserInProject,
-		removeProjectUser
+		removeProjectUser,
+		filteredTasks
 	} = useProjectUser(id)
 
 	const handleChooseRole = useCallback((e, { value }) => {
@@ -59,7 +61,10 @@ const CurrentProjectPage = () => {
 					</div>
 					<div className={classes.self}>{currentProject.description}</div>
 				</div>
-				<ProjectUsers project={usersOfProject} onRemove={removeProjectUser} />
+				<div className={classes.content}>
+					<ProjectUsers project={usersOfProject} onRemove={removeProjectUser} />
+					<ProjectTasks tasks={filteredTasks} />
+				</div>
 			</div>
 			<Modal
 				onClose={() => setOpen(false)}

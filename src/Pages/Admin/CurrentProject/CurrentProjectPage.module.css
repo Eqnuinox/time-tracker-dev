@@ -47,3 +47,9 @@
     padding: 10px;
     align-self: flex-start;
 }
+
+.content{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+}

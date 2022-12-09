@@ -6,21 +6,32 @@ import {
 	findAllProjectUserSlice,
 	removeUserFromProject
 } from '../Redux/Slices/projectControllSlices/allProjectUsers'
+import { findAllTasksSlice } from '../Redux/Slices/projectControllSlices/allTasksSlice'
 
 export const useProjectUser = (projectId) => {
 	const [filteredData, setFilteredData] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState({})
 	const [success, setSuccess] = useState()
+	const [filteredTasks, setFilteredTasks] = useState([])
 
 	const dispatch = useDispatch()
 	const { data, status } = useSelector((state) => state.usersOnProject)
+	const { data: tasks, status: taskStatus } = useSelector(
+		(state) => state.projectTasks
+	)
 
 	useEffect(() => {
 		dispatch(findAllProjectUserSlice(projectId))
+		dispatch(findAllTasksSlice())
+
 		const filter = data.filter(
 			(item) => item.project.id.toString() === projectId
 		)
+		const tasksFilter = tasks.filter(
+			(item) => item.project.id.toString() === projectId
+		)
+		setFilteredTasks(tasksFilter)
 		setFilteredData(filter)
 		//eslint-disable-next-line
 	}, [isLoading])
@@ -58,6 +69,7 @@ export const useProjectUser = (projectId) => {
 	return {
 		registerUserInProject,
 		filteredData,
+		filteredTasks,
 		status,
 		success,
 		error,
